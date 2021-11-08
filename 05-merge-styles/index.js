@@ -4,8 +4,6 @@ const path = require('path');
 const pathToDir=__dirname;
 const pathToStylesDir=path.join(pathToDir,'styles');
 const pathToProjectDistDir=path.join(pathToDir,'project-dist');
-const writeStream=fs.createWriteStream(path.join(pathToProjectDistDir,'bundle.css'),{flags:'w'});
-writeStream.on('error', err => process.exit(err.message));
 
 function generateCssFile(){
     getFolderContent()
@@ -23,7 +21,7 @@ function getCssFileNames(content){
 }
 
 function writeDataToCssFile(content){
-    writeStream.write(content, err=>process.exit(err.message));
+   return fsPromises.appendFile(path.join(pathToProjectDistDir,'bundle.css'),content+'\n');
 }
 
 function getFileContent(fileNames){
