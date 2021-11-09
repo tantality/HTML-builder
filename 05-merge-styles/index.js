@@ -37,4 +37,11 @@ process.on('exit',(message)=>{
 });
 
 
-generateCssFile();
+function deleteFile(){
+    return fsPromises.access(path.join(pathToProjectDistDir,'bundle.css'))
+    .then(()=>{return fsPromises.unlink(path.join(pathToProjectDistDir,'bundle.css'))});
+}
+
+deleteFile()
+.then(()=>generateCssFile());
+
