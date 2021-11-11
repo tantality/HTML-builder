@@ -39,7 +39,8 @@ process.on('exit',(message)=>{
 
 function deleteFile(){
     return fsPromises.access(path.join(pathToProjectDistDir,'bundle.css'))
-    .then(()=>{return fsPromises.unlink(path.join(pathToProjectDistDir,'bundle.css'))});
+    .then(()=>{return fsPromises.unlink(path.join(pathToProjectDistDir,'bundle.css'))})
+    .catch(err=> err);
 }
 
 deleteFile()
